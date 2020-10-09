@@ -5,3 +5,7 @@ Une API de calcul de prix.
 ## Groupe
 - Julien DUBREUIL
 - Maxime JOUARD
+
+## Installation
+Vous devez lancer `npm install` avant de faire tourner le code. 
+Lancer le serveur avec la commande `npm start`.

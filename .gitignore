@@ -1,0 +1,9 @@
+# =====================
+# ===   GITIGNORE   ===
+# =====================
+
+
+# fichiers à exclure
+.DS_Store
+
+# dossiers à exclure

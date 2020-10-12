@@ -14,7 +14,7 @@ app.get('/',(req, res) => {
   res.send('Bienvenue sur l\'application Carpaccio \nPar Julien DUBREUIL & Maxime JOUARD\n');
 });
 
-// curl -X GET 'http://localhost:3000/products/'
+// curl -X GET 'http://localhost:3000/'
 
 
 // =================================================

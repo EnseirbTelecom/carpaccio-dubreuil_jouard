@@ -5,5 +5,7 @@
 
 # fichiers à exclure
 .DS_Store
+package-lock.json
 
 # dossiers à exclure
+/node_modules/

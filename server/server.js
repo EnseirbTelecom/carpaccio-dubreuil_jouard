@@ -9,12 +9,17 @@ const products = []
 
 // =================================================
 // GET http://localhost:3000/
-
 app.get('/',(req, res) => {
   res.send('Bienvenue sur l\'application Carpaccio \nPar Julien DUBREUIL & Maxime JOUARD\n');
 });
-
 // curl -X GET 'http://localhost:3000/'
+
+// =================================================
+// GET http://localhost:3000/id
+app.get('/id',(req, res) => {
+  res.send('{"id" : "carpaccio-dubreuil_jouard"}\n');
+});
+
 
 
 // =================================================

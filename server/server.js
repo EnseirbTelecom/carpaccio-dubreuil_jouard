@@ -6,6 +6,21 @@ const bodyParser = require("body-parser")
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 
+const paramChecker = (req, res, next) => {
+	const bill = {
+    prices: req.body.prices,
+    quantities: req.body.quantities,
+  }
+	for (let attr in bill) {
+		if (bill[attr] === undefined)
+			return res.status(400).json({ "error" : "please check input arguments for /bill" })
+  }
+  if (bill.prices.length != bill.quantities.length) {
+    return res.status(400).json({ "error" : "prices and quantities have not the same length for /bill" })
+  }
+	next()
+}
+
 // =================================================
 // Les Routes
 // =================================================
@@ -29,7 +44,7 @@ app.get('/id',(req, res) => {
 
 // =================================================
 // POST http://localhost:3000/bill/
-app.post('/bill', (req, res) => {
+app.post('/bill', paramChecker, (req, res) => {
   const bill = {
     prices: req.body.prices,
     quantities: req.body.quantities,

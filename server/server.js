@@ -6,6 +6,13 @@ const bodyParser = require("body-parser")
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 
+
+
+// ==================================
+// ======      FONCTIONS      =======
+// ==================================
+
+// vérifie que tous les paramètres sont ok pour la requete POST
 const paramChecker = (req, res, next) => {
 	const bill = {
     prices: req.body.prices,
@@ -20,6 +27,8 @@ const paramChecker = (req, res, next) => {
   }
 	next()
 }
+
+
 
 // =================================================
 // Les Routes

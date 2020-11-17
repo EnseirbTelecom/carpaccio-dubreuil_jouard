@@ -1,12 +1,15 @@
 const express = require("express")
 const app = express()
-const cors = require('cors');
-const bodyParser = require('body-parser');
-const products = []
+
+// Express middleware to parse requests' body
+const bodyParser = require("body-parser")
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: false }))
 
 // =================================================
 // Les Routes
 // =================================================
+
 
 // =================================================
 // GET http://localhost:3000/
@@ -15,29 +18,30 @@ app.get('/',(req, res) => {
 });
 // curl -X GET 'http://localhost:3000/'
 
+
 // =================================================
 // GET http://localhost:3000/id
 app.get('/id',(req, res) => {
-  res.send('{"id" : "carpaccio-dubreuil_jouard"}\n');
+  res.send({"id" : "carpaccio-dubreuil_jouard"});
 });
-app.use(cors())
-app.use(bodyParser.json());
+// curl -X GET 'http://localhost:3000/id'
+
+
 // =================================================
 // POST http://localhost:3000/bill/
 app.post('/bill', (req, res) => {
-  console.log(req.body);
-  res.send('{"res":"ok"}')
-  // const bill = {
-  //   price: req.body.price,
-  //   quantities: req.body.quantities,
-  // }
-  //     .then(res => res.json(bill));
-  //     console.log(res);
-  // return {}
+  const bill = {
+    prices: req.body.prices,
+    quantities: req.body.quantities,
+  }
+  let result = 0;
+  for (let i = 0; i < bill.prices.length; i++){
+    result += bill.prices[i] * bill.quantities[i];
+  }
+  res.send({"total":result});
 })
-/*
-curl -i -H "Content-Type:application/json" -X POST -d '{"price":"1", "quantities":"1"}' http://localhost:3000/bill
-*/
+// curl -H "Content-Type:application/json" -X POST -d '{"prices":[10,20], "quantities":[1,2]}' http://localhost:3000/bill
+
 
 // =================================================
 // Démarrage du serveur

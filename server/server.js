@@ -20,7 +20,22 @@ app.get('/id',(req, res) => {
   res.send('{"id" : "carpaccio-dubreuil_jouard"}\n');
 });
 
-
+// =================================================
+// POST http://localhost:3000/bill/
+app.post('/bill', (req, res) => {
+  console.log(req.body);
+  res.end();
+  // const bill = {
+  //   price: req.body.price,
+  //   quantities: req.body.quantities,
+  // }
+  //     .then(res => res.json(bill));
+  //     console.log(res);
+  // return {}
+})
+/*
+curl -i -H "Content-Type:application/json" -X POST -d '{"price":"1", "quantities":"1"}' http://localhost:3000/bill
+*/
 
 // =================================================
 // Démarrage du serveur

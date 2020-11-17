@@ -1,6 +1,7 @@
 const express = require("express")
 const app = express()
-
+const cors = require('cors');
+const bodyParser = require('body-parser');
 const products = []
 
 // =================================================
@@ -19,12 +20,13 @@ app.get('/',(req, res) => {
 app.get('/id',(req, res) => {
   res.send('{"id" : "carpaccio-dubreuil_jouard"}\n');
 });
-
+app.use(cors())
+app.use(bodyParser.json());
 // =================================================
 // POST http://localhost:3000/bill/
 app.post('/bill', (req, res) => {
   console.log(req.body);
-  res.end();
+  res.send('{"res":"ok"}')
   // const bill = {
   //   price: req.body.price,
   //   quantities: req.body.quantities,

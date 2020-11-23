@@ -71,6 +71,9 @@ app.post('/bill', paramChecker, (req, res) => {
 // Démarrage du serveur
 // =================================================
 
-app.listen(3000, () => {
-  console.log("Serveur démarré")
-})
+var server = app.listen(3000, () => {
+  var port = server.address().port;
+  console.log("Serveur démarré sur le port %s", port);
+});
+
+module.exports = server;

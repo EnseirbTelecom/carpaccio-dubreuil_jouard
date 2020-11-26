@@ -48,11 +48,11 @@ describe('Test des fonctionnalités de Carpaccio', function () {
     it('POST /bill', function testBill(done) {
         request(server)
             .post('/bill')
-            .send({ "prices" : [10, 20], "quantities" : [1, 2] })
+            .send({ "prices" : [15, 11], "quantities" : [1, 2], "country" : "FR" })
             .set('Accept', 'application/json')
             .expect('Content-Type', /json/)
             .expect(200, {
-                total: 50
+                total: 44.4
             }, done);
     });
 });

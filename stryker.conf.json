@@ -1,0 +1,20 @@
+{
+  "$schema": "./node_modules/@stryker-mutator/core/schema/stryker-schema.json",
+  "packageManager": "npm",
+  "reporters": [
+    "html",
+    "clear-text",
+    "progress",
+    "dashboard"
+  ],
+  "mutate": [
+    "*.js",
+    "!*.test.js",
+    "!invoiceFilter.js"
+  ],
+  "testRunner": "jest",
+  "jest" : {
+    "enableFindRelatedTests": false
+  },
+  "coverageAnalysis": "off"
+}

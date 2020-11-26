@@ -38,7 +38,7 @@ const paramChecker = (req, res, next) => {
 // =================================================
 // GET http://localhost:3000/
 app.get('/',(req, res) => {
-  res.send('Bienvenue sur l\'application Carpaccio \nPar Julien DUBREUIL & Maxime JOUARD\n');
+  res.send('Welcome on the Carpaccio app\nBy Julien DUBREUIL & Maxime JOUARD\n');
 });
 // curl -X GET 'http://localhost:3000/'
 
@@ -73,7 +73,7 @@ app.post('/bill', paramChecker, (req, res) => {
 
 var server = app.listen(3000, () => {
   var port = server.address().port;
-  console.log("Serveur démarré sur le port %s", port);
+  console.log("Server launched on the %s port", port);
 });
 
 module.exports = server;

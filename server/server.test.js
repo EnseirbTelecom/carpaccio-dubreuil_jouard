@@ -27,14 +27,23 @@ describe('Test des fonctionnalités de Carpaccio', function () {
             }, done);
     });
 
-    it('POST /bill (bad arguments)', function testBill(done) {
+    it('POST /bill (bad arguments: not enough arguments)', function testBill(done) {
         request(server)
             .post('/bill')
             .send({ "prices" : [10, 20] })
             .set('Accept', 'application/json')
             .expect('Content-Type', /json/)
             .expect(400, done)
-    }); 
+    });
+    
+    it('POST /bill (bad arguments: not the same length)', function testBill(done) {
+        request(server)
+            .post('/bill')
+            .send({ "prices":[10,20], "quantities":[1] })
+            .set('Accept', 'application/json')
+            .expect('Content-Type', /json/)
+            .expect(400, done)
+    });
 
     it('POST /bill', function testBill(done) {
         request(server)

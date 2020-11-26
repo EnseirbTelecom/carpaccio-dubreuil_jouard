@@ -4,7 +4,8 @@
   "description": "Une API de calcul de prix.",
   "main": "server/server.js",
   "scripts": {
-    "test": "mocha server/server.test.js",
+    "test": "jest --coverage",
+    "mutation": "stryker run",
     "start": "nodemon server/server.js"
   },
   "repository": {
@@ -21,8 +22,17 @@
     "express": "^4.17.1",
     "nodemon": "^2.0.4"
   },
+  "standard": {
+    "ignore": [
+      "/reports/**/*.js",
+      "/coverage/**/*.js"
+    ]
+  },
   "devDependencies": {
-    "mocha": "^8.2.1",
+    "@stryker-mutator/core": "^4.1.2",
+    "@stryker-mutator/jest-runner": "^4.1.2",
+    "jest": "^26.6.1",
+    "standard": "^16.0.3",
     "supertest": "^6.0.1"
   }
 }

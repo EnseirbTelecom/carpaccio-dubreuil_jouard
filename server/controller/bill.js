@@ -11,89 +11,84 @@ du prix prenant en compte la TVA.
 
 
 class Bill {
+  constructor () {
+    this.taxList = {
+      "DE": 20,
+      "UK": 21,
+      "FR": 20,
+      "IT": 25,
+      "ES": 19,
+      "PL": 21,
+      "RO": 20,
+      "NL": 20,
+      "BE": 24,
+      "EL": 20,
+      "CZ": 19,
+      "PT": 23,
+      "HU": 27,
+      "SE": 23,
+      "AT": 22,
+      "BG": 21,
+      "DK": 21,
+      "FI": 17,
+      "SK": 18,
+      "IE": 21,
+      "HR": 23,
+      "LT": 23,
+      "SI": 24,
+      "LV": 20,
+      "EE": 22,
+      "CY": 21,
+      "LU": 25,
+      "MT": 20
+    }
+    this.bill = {
+      prices:     undefined,
+      quantities: undefined,
+      country:    undefined
+    }
+    this.response = {
+      total: undefined
+    }
+  }
 
-    constructor () {
-      this.taxList = {
-        "DE": 20,
-        "UK": 21,
-        "FR": 20,
-        "IT": 25,
-        "ES": 19,
-        "PL": 21,
-        "RO": 20,
-        "NL": 20,
-        "BE": 24,
-        "EL": 20,
-        "CZ": 19,
-        "PT": 23,
-        "HU": 27,
-        "SE": 23,
-        "AT": 22,
-        "BG": 21,
-        "DK": 21,
-        "FI": 17,
-        "SK": 18,
-        "IE": 21,
-        "HR": 23,
-        "LT": 23,
-        "SI": 24,
-        "LV": 20,
-        "EE": 22,
-        "CY": 21,
-        "LU": 25,
-        "MT": 20
-      }
+  paramChecker() {
+    for (let attr in this.bill) {
+      if (this.bill[attr] === undefined)
+        return ({ "error" : "please check input arguments for /bill" })
+    }
+    if (this.bill.prices.length != this.bill.quantities.length) {
+      return ({ "error" : "prices and quantities have not the same length for /bill" })
+    }
+    if (!this.taxList[this.bill.country] && this.bill.country != undefined){
+      return ({ "error" : "this country does not exist" })
+    }
+    return undefined;
+  }
 
-      this.bill = {
-        prices: undefined,
-        quantities: undefined,
-        country: undefined
-      }
-
-      this.response = {
-        total: undefined
-      }
-
+  priceCalculator (prices, quantities, country) {
+    let result = 0;
+    for (let i = 0; i < prices.length; i++){
+      result += prices[i] * quantities[i];
     }
 
-    paramChecker() {
-      for (let attr in this.bill) {
-        if (this.bill[attr] === undefined)
-          return ({ "error" : "please check input arguments for /bill" })
-      }
-      if (this.bill.prices.length != this.bill.quantities.length) {
-        return ({ "error" : "prices and quantities have not the same length for /bill" })
-      }
-      if (!this.taxList[this.bill.country] && this.bill.country != undefined){
-        return ({ "error" : "this country does not exist" })
-      }
-      return undefined;
+    this.response.total = result * (1 + this.taxList[country]/100)
+  }
+
+  postBill (billArguments) {
+    this.bill.prices      = billArguments.prices
+    this.bill.quantities  = billArguments.quantities
+    this.bill.country     = billArguments.country
+
+    const err = this.paramChecker()
+  
+    if (err){
+      return err
+    } else {
+      this.priceCalculator(this.bill.prices, this.bill.quantities, this.bill.country)
+      return this.response;
     }
-
-    priceCalculator (prices, quantities, country) {
-      let result = 0;
-      for (let i = 0; i < prices.length; i++){
-        result += prices[i] * quantities[i];
-      }
-
-      this.response.total = result * (1 + this.taxList[country]/100)
-    }
-
-    postBill (billArguments) {
-      this.bill.prices = billArguments.prices
-      this.bill.quantities = billArguments.quantities
-      this.bill.country = billArguments.country
-
-      const err = this.paramChecker()
-    
-      if (err){
-        return err
-      } else {
-        this.priceCalculator(this.bill.prices, this.bill.quantities, this.bill.country)
-        return this.response;
-      }
-   
-    }
+  }
 }
   
 module.exports = Bill

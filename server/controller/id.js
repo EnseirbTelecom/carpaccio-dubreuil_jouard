@@ -7,14 +7,9 @@ le nom de votre dépôt GitHub sour la forme { "id" : "it340-foo" }
 
 class Id {
     constructor () {
-        this.response = {id: 'carpaccio-dubreuil_jouard'}
+        this.response = { id: 'carpaccio-dubreuil_jouard' }
     }
-    getId (req, res, next) {
-        console.log(this.response.id)
-        res.send("toto")
-        //res.send(this.response)
-    }
-    testId () {
+    getId () {
         return this.response
     }
 }

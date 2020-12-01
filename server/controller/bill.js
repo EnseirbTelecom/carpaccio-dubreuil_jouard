@@ -58,13 +58,13 @@ class Bill {
 
     paramChecker() {
       for (let attr in this.bill) {
-        if (bill[attr] === undefined)
+        if (this.bill[attr] === undefined)
           return ({ "error" : "please check input arguments for /bill" })
       }
       if (this.bill.prices.length != this.bill.quantities.length) {
         return ({ "error" : "prices and quantities have not the same length for /bill" })
       }
-      if (!this.taxList[this.bill.country]){
+      if (!this.taxList[this.bill.country] && this.bill.country != undefined){
         return ({ "error" : "this country does not exist" })
       }
       return undefined;
@@ -79,30 +79,20 @@ class Bill {
       this.response.total = result * (1 + this.taxList[country]/100)
     }
 
-    postBill (req, res, next) {
-      this.bill.prices = req.body.prices
-      this.bill.quantities = req.body.quantities
-      this.bill.country = req.body.country
-      
+    postBill (billArguments) {
+      this.bill.prices = billArguments.prices
+      this.bill.quantities = billArguments.quantities
+      this.bill.country = billArguments.country
+
       const err = this.paramChecker()
     
       if (err){
-        return res.status(400).json(err)
+        return err
       } else {
         this.priceCalculator(this.bill.prices, this.bill.quantities, this.bill.country)
-        res.send(this.result);
+        return this.response;
       }
-        
-    }
-
-    testResult (prices, quantities, country) {
-      this.bill.prices = prices
-      this.bill.quantities = quantities
-      this.bill.country = country
-
-      this.priceCalculator(this.bill.prices, this.bill.quantities, this.bill.country)
-
-      return this.response
+   
     }
 }
   

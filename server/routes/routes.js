@@ -12,26 +12,32 @@ const Bill = require('../controller/bill.js')
 const bill = new Bill()
 var id = new Id()
 
-router.get('/', 
+router.get('/',
     (req, res, next) => {
         return res.send('Welcome on the Carpaccio app\nBy Julien DUBREUIL & Maxime JOUARD\n');
     }
 );
 
-router.get('/id', 
+router.get('/id',
     (req, res, next) => {
         return res.send(id.getId());
     }
 );
 
-router.post('/bill', 
+router.post('/bill',
     (req, res, next) => {
         const billArguments = {
             prices: req.body.prices,
             quantities: req.body.quantities,
             country: req.body.country
           }
-        return res.send(bill.postBill(billArguments));
+        const result = bill.postBill(billArguments)
+        if (result.error){
+          return res.status(400).send(result);
+        }
+        else{
+        return res.status(200).send(result);
+      }
     }
 );
 

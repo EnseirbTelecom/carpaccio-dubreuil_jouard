@@ -1,8 +1,8 @@
-# https://svrooij.nl/2020/06/automate-your-release-with-github-actions/
 # https://www.wizeline.com/blog-continuous-deployment-with-semantic-release-and-github-actions/
 
-name: Node.js CI
+name: Test and release
 
+# Run the workflow when a Pull Request is opened or when changes are pushed to master
 on:
   push:
     branches: [ master ]
@@ -16,16 +16,22 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [10.x, 12.x, 14.x]
+        # Run the steps below with the following versions of Node.js
+        node-version: [8.x, 10.x, 12.x, 14.x]
 
     steps:
+    # Fetch the latest commit
     - uses: actions/checkout@v2
+    # Setup Node.js using the appropriate version
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
+    # Install package dependencies
     - run: npm ci
+    # Launch construction tasks if it is necessary 
     - run: npm run build --if-present
+    # Run tests
     - run: npm test
 
   build:

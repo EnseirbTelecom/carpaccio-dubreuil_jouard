@@ -27,7 +27,7 @@ jobs:
       # Setup Node.js using the appropriate version
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
-        with:
+      with:
         node-version: ${{ matrix.node-version }}
     # Install package dependencies
     - name: Install dependencies

@@ -12,10 +12,18 @@ Une API de calcul de prix.
 - Lancer le test des fonctionnalités avec la commande `npm test`.
 
 ## Fonctionnement lors du developpement
+mise en forme d'un commit : 
+<type>[optional scope]: <description>
+
+[optional body]
+
+[optional footer(s)]
+
 Semantic Versioning Specification : 
 - Patch version Z (x.y.Z | x > 0) : commencer le message du commit avec `fix:`
 - Minor version Y (x.Y.z | x > 0) : commencer le message du commit avec `feat:`
-- Major version X (X.y.z | X > 0) : commencer le message du commit avec `BREAKING CHANGE:`
+- Major version X (X.y.z | X > 0) : mettre un footer avec `BREAKING CHANGE:`
+*exemple :* git commit -a -m"$(echo -e "feat: version 2\n\ntest\n\nBREAKING CHANGE: version 2")"
 
 Pour fermer l'issue X, écrire dans le message du commit  `close #X`.
 

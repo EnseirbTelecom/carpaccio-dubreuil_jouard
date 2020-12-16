@@ -11,21 +11,16 @@ jobs:
   test:
     
     runs-on: ubuntu-latest
-    
-    strategy:
-      matrix:
-        # Run the steps below with the following versions of Node.js
-        node-version: [8.x, 10.x, 12.x]
-    
+
     steps:
     # Fetch the latest commit
     - name: Checkout
       uses: actions/checkout@v1
-      # Setup Node.js using the appropriate version
-    - name: Use Node.js ${{ matrix.node-version }}
+    # Setup Node.js using the appropriate version
+    - name: Use node 12
       uses: actions/setup-node@v1
-        with:
-        node-version: ${{ matrix.node-version }}
+      with:
+        node-version: 12
     # Install package dependencies
     - name: Install dependencies
       run: npm ci

@@ -28,10 +28,8 @@
       "/coverage/**/*.js"
     ]
   },
-  {
-    "release": {
-      "branches": ["master", "next"]
-    }
+  "release": {
+    "branches": ["master", "next"]
   },
   "devDependencies": {
     "@stryker-mutator/core": "^4.1.2",

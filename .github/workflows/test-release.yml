@@ -1,17 +1,18 @@
 # https://svrooij.nl/2020/06/automate-your-release-with-github-actions/
 # https://www.wizeline.com/blog-continuous-deployment-with-semantic-release-and-github-actions/
 
-name: Run tests and publish
+name: Run tests
 
 # Run the workflow when a Pull Request is opened or when changes are pushed to master
 on:
   pull_request:
+    branches: [ master ]
   push:
     branches: [ master ]
 
 jobs:
 
-  test:
+  build:
 
     runs-on: ubuntu-latest
 
@@ -23,7 +24,7 @@ jobs:
     steps:
     # Fetch the latest commit
     - name: Checkout
-      uses: actions/checkout@v1
+      uses: actions/checkout@v2
       # Setup Node.js using the appropriate version
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
@@ -34,7 +35,7 @@ jobs:
       run: npm ci
     # Build library
     - name: Build library
-      run: npm run build
+      run: npm run build --if-present
     # Run tests
     - name: Test
       run: npm test

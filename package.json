@@ -29,7 +29,7 @@
     ]
   },
   "release": {
-    "branches": ["master", "next"]
+    "branches": ["master"]
   },
   "devDependencies": {
     "@stryker-mutator/core": "^4.1.2",

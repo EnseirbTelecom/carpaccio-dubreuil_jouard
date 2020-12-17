@@ -23,7 +23,7 @@ Semantic Versioning Specification :
 - Patch version Z (x.y.Z | x > 0) : commencer le message du commit avec `fix:`
 - Minor version Y (x.Y.z | x > 0) : commencer le message du commit avec `feat:`
 - Major version X (X.y.z | X > 0) : mettre un footer avec `BREAKING CHANGE:`
-*exemple :* git commit -a -m"$(echo -e "feat: version 2\n\ntest\n\nBREAKING CHANGE: version 2")"
+*exemple :* `git commit -a -m"$(echo -e "feat: version 2\n\ntest\n\nBREAKING CHANGE: version 2")"`
 
 Pour fermer l'issue X, écrire dans le message du commit  `close #X`.
 

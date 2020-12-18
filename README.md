@@ -31,3 +31,4 @@ Pour fermer l'issue X, écrire dans le message du commit  `close #X`.
 - La requête GET /id renvoie l'id de notre projet: {id: 'carpaciao-dubreuil_jouard'}.
 - La requête POST /bill prend dans le body un tableau quantities, un tableau prices et une chaîne de caractère country et renvoie le prix total en appliquant la taxe associée au pays country. En cas d'argument manquant, de tableaux de tailles différentes, ou de pays non existant, un status 400 est envoyé avec l'erreur associée.
 - La TVA est prise en charge pour plusieurs pays.
+- On peut spécifier dans quelle devise on veut payer. il est à noter qu'il est possible d’omettre le paramètre currency et d’envoyer une requête de la forme { "prices" : [15.99, 11.99], "quantities" : [1, 2], "country" : "ES" } ou { "prices" : [15.99, 11.99], "quantities" : [1, 2], "country" : "ES" } comme précédemment, tout en obtenant le même résultat.

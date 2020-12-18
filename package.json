@@ -21,6 +21,7 @@
   "homepage": "https://github.com/EnseirbTelecom/carpaccio-dubreuil_jouard#readme",
   "dependencies": {
     "express": "^4.17.1",
+    "node-fetch": "^2.6.1",
     "nodemon": "^2.0.4"
   },
   "standard": {

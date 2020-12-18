@@ -45,16 +45,18 @@ class Bill {
     this.bill = {
       prices:     undefined,
       quantities: undefined,
-      country:    undefined
+      country:    undefined,
+      currency:   undefined
     }
     this.response = {
       total: undefined
     }
   }
 
+  // Fonction qui vérifie les paramètres rentrés par l'utilisateur
   paramChecker() {
     for (let attr in this.bill) {
-      if (this.bill[attr] === undefined)
+      if ( (this.bill[attr] === undefined) && (attr != 'currency') )
         return ({ "error" : "please check input arguments for /bill" });
     }
     if (this.bill.prices.length != this.bill.quantities.length) {
@@ -66,6 +68,7 @@ class Bill {
     return undefined;
   }
 
+  // Fonction qui calcule le prix total
   priceCalculator (prices, quantities, country, currencyRate) {
     let result = 0;
     for (let i = 0; i < prices.length; i++){
@@ -75,6 +78,7 @@ class Bill {
     this.response.total = result * (1 + this.taxList[country]/100) * currencyRate;
   }
 
+  // Fonction qui récupère le taux de la monnaie voulue pour payer
   async currencyRecovery (currency) {
     const fetch = require("node-fetch");
     const rawResponse = await fetch('https://api.exchangeratesapi.io/latest', {
@@ -97,17 +101,32 @@ class Bill {
     this.bill.prices      = billArguments.prices;
     this.bill.quantities  = billArguments.quantities;
     this.bill.country     = billArguments.country;
-    console.log(billArguments);
+    this.bill.currency    = billArguments.currency;
+
     const err = this.paramChecker();
-    console.log(err);
+    
+    // vérification des paramètres
     if (err){
       return err;
-    } else {
-      const currencyRate = await this.currencyRecovery('CAD');
+    }
+
+    else {
+      // récupération du taux de conversion
+      let currencyRate;
+      if (this.bill.currency == undefined) {
+        currencyRate = 1;
+      } else {
+        currencyRate = await this.currencyRecovery(this.bill.currency);
+      }
+
+      // erreur si mauvais taux
       if (currencyRate == -1) {
         return ({ "error" : "this currency does not exist" })
-      } else {
-        this.priceCalculator(this.bill.prices, this.bill.quantities, this.bill.country, 1)
+      } 
+      
+      // calcul du prix
+      else {
+        this.priceCalculator(this.bill.prices, this.bill.quantities, this.bill.country, currencyRate)
         return this.response;
       }
     }

@@ -46,3 +46,29 @@ test('POST /bill', async () => {
     const result = await bill.postBill(billArguments);
     expect(result).toStrictEqual(desiredResponse)
 })
+
+test('POST /bill with currency', async () => {
+    const bill = new Bill()
+    const billArguments = { 
+        prices :     [15, 11], 
+        quantities : [1, 2], 
+        country :    "FR",
+        currency: "CAD",
+    }
+    const result = await bill.postBill(billArguments);
+    console.log(result);
+    expect(result.total == undefined).toBeFalsy()
+})
+
+test('POST /bill with bad currency', async () => {
+    const bill = new Bill()
+    desiredResponse = "this currency does not exist";
+    const billArguments = { 
+        prices :     [15, 11], 
+        quantities : [1, 2], 
+        country :    "FR",
+        currency: "TOTO",
+    }
+    const result = await bill.postBill(billArguments);
+    expect(result.error).toBe(desiredResponse)
+})

@@ -29,7 +29,8 @@ router.post('/bill',
     const billArguments = {
       prices: req.body.prices,
       quantities: req.body.quantities,
-      country: req.body.country
+      country: req.body.country,
+      discount: req.body.discount
     }
     const result = bill.postBill(billArguments)
     if (result.error){

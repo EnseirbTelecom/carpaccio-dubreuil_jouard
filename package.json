@@ -1,6 +1,6 @@
 {
   "name": "carpaccio",
-  "version": "1.0.0",
+  "version": "2.2.0",
   "description": "Une API de calcul de prix.",
   "main": "server/server.js",
   "private": true,
@@ -21,6 +21,7 @@
   "homepage": "https://github.com/EnseirbTelecom/carpaccio-dubreuil_jouard#readme",
   "dependencies": {
     "express": "^4.17.1",
+    "node-fetch": "^2.6.1",
     "nodemon": "^2.0.4"
   },
   "standard": {

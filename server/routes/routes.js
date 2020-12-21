@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 
-
 // Express middleware to parse requests' body
 const bodyParser = require("body-parser")
 router.use(bodyParser.json())
@@ -25,14 +24,14 @@ router.get('/id',
 );
 
 router.post('/bill',
-  (req, res, next) => {
+  async (req, res, next) => {
     const billArguments = {
       prices: req.body.prices,
       quantities: req.body.quantities,
       country: req.body.country,
       discount: req.body.discount
     }
-    const result = bill.postBill(billArguments)
+    const result = await bill.postBill(billArguments)
     if (result.error){
       return res.status(400).send(result);
     } else {

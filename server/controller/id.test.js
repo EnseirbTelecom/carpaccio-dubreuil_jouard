@@ -1,3 +1,4 @@
+/* eslint-env jest */
 // Test unitaire de la classe Id
 
 const Id = require('./id.js')

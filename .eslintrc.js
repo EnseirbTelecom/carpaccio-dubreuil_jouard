@@ -169,9 +169,7 @@ module.exports = {
         "no-path-concat": "error",
         "no-plusplus": [
             "error",
-            {
-                "allowForLoopAfterthoughts": true
-            }
+            { "allowForLoopAfterthoughts": true }
         ],
         "no-process-env": "error",
         "no-process-exit": "error",
@@ -257,10 +255,7 @@ module.exports = {
         "semi": "off",
         "semi-spacing": [
             "error",
-            {
-                "after": true,
-                "before": false
-            }
+            { "after": true, "before": false }
         ],
         "semi-style": [
             "error",

@@ -1,3 +1,4 @@
+/* eslint-env jest */
 // Test unitaire de la classe Bill
 
 const Bill = require('./bill.js')
@@ -68,7 +69,7 @@ test('POST /bill NO_DISCOUNT', async () => {
     const billArguments = {
         prices :     [15, 11],
         quantities : [1, 2],
-        country :    "FR" ,
+        country :    "FR",
         discount:     "NO_DISCOUNT"
     }
     const result = await bill.postBill(billArguments);
@@ -81,8 +82,8 @@ test('POST /bill FLAT_DISCOUNT', async () => {
     const billArguments = {
         prices :     [15, 11],
         quantities : [1, 2],
-        country :    "FR" ,
-        discount:     "FLAT_DISCOUNT"
+        country :    "FR",
+        discount:    "FLAT_DISCOUNT"
     }
     const result = await bill.postBill(billArguments);
     expect(result).toStrictEqual(desiredResponse)
@@ -94,7 +95,7 @@ test('POST /bill PROGRESSIVE_DISCOUNT PRICE<1000', async () => {
     const billArguments = {
         prices :     [100, 200],
         quantities : [1, 2],
-        country :    "FR" ,
+        country :    "FR",
         discount:    "PROGRESSIVE_DISCOUNT"
     }
     const result = await bill.postBill(billArguments);
@@ -107,7 +108,7 @@ test('POST /bill PROGRESSIVE_DISCOUNT 1000<PRICE<5000', async () => {
     const billArguments = {
         prices :     [1000, 1500],
         quantities : [1, 2],
-        country :    "FR" ,
+        country :    "FR",
         discount:    "PROGRESSIVE_DISCOUNT"
     }
     const result = await bill.postBill(billArguments);
@@ -120,7 +121,7 @@ test('POST /bill PROGRESSIVE_DISCOUNT 5000<PRICE<7000 ', async () => {
     const billArguments = {
         prices :     [2000, 1500],
         quantities : [1, 2],
-        country :    "FR" ,
+        country :    "FR",
         discount:    "PROGRESSIVE_DISCOUNT"
     }
     const result = await bill.postBill(billArguments);
@@ -133,7 +134,7 @@ test('POST /bill PROGRESSIVE_DISCOUNT 7000<PRICE<10000', async () => {
     const billArguments = {
         prices :     [3000, 1500],
         quantities : [1, 2],
-        country :    "FR" ,
+        country :    "FR",
         discount:    "PROGRESSIVE_DISCOUNT"
     }
     const result = await bill.postBill(billArguments);
@@ -146,7 +147,7 @@ test('POST /bill PROGRESSIVE_DISCOUNT 10000<PRICE<50000', async () => {
     const billArguments = {
         prices :     [5000, 5000],
         quantities : [1, 2],
-        country :    "FR" ,
+        country :    "FR",
         discount:    "PROGRESSIVE_DISCOUNT"
     }
     const result = await bill.postBill(billArguments);
@@ -159,7 +160,7 @@ test('POST /bill PROGRESSIVE_DISCOUNT PRICE>50000', async () => {
     const billArguments = {
         prices :     [10000, 30000],
         quantities : [1, 2],
-        country :    "FR" ,
+        country :    "FR",
         discount:    "PROGRESSIVE_DISCOUNT"
     }
     const result = await bill.postBill(billArguments);
@@ -172,8 +173,8 @@ test('POST /bill 100<FIXED_DISCOUNT PRICE<100', async () => {
     const billArguments = {
         prices :     [20, 15],
         quantities : [1, 2],
-        country :    "FR" ,
-        discount:     "FIXED_DISCOUNT"
+        country :    "FR",
+        discount:    "FIXED_DISCOUNT"
     }
     const result = await bill.postBill(billArguments);
     expect(result).toStrictEqual(desiredResponse)
@@ -185,8 +186,8 @@ test('POST /bill 100<FIXED_DISCOUNT 100<PRICE<400', async () => {
     const billArguments = {
         prices :     [100, 100],
         quantities : [1, 2],
-        country :    "FR" ,
-        discount:     "FIXED_DISCOUNT"
+        country :    "FR",
+        discount:    "FIXED_DISCOUNT"
     }
     const result = await bill.postBill(billArguments);
     expect(result).toStrictEqual(desiredResponse)
@@ -198,8 +199,8 @@ test('POST /bill 400<FIXED_DISCOUNT PRICE<1000', async () => {
     const billArguments = {
         prices :     [200, 250],
         quantities : [1, 2],
-        country :    "FR" ,
-        discount:     "FIXED_DISCOUNT"
+        country :    "FR",
+        discount:    "FIXED_DISCOUNT"
     }
     const result = await bill.postBill(billArguments);
     expect(result).toStrictEqual(desiredResponse)
@@ -211,8 +212,8 @@ test('POST /bill FIXED_DISCOUNT PRICE>1000', async () => {
     const billArguments = {
         prices :     [500, 400],
         quantities : [1, 2],
-        country :    "FR" ,
-        discount:     "FIXED_DISCOUNT"
+        country :    "FR",
+        discount:    "FIXED_DISCOUNT"
     }
     const result = await bill.postBill(billArguments);
     expect(result).toStrictEqual(desiredResponse)
@@ -223,8 +224,8 @@ test('POST /bill with currency', async () => {
     const billArguments = { 
         prices :     [15, 11], 
         quantities : [1, 2], 
-        country :    "FR",
-        currency: "CAD",
+        country :   "FR",
+        currency:   "CAD",
     }
     const result = await bill.postBill(billArguments);
     console.log(result);
@@ -233,12 +234,12 @@ test('POST /bill with currency', async () => {
 
 test('POST /bill with bad currency', async () => {
     const bill = new Bill()
-    desiredResponse = "this currency does not exist";
+    const desiredResponse = "this currency does not exist";
     const billArguments = { 
         prices :     [15, 11], 
         quantities : [1, 2], 
-        country :    "FR",
-        currency: "TOTO",
+        country :   "FR",
+        currency:   "TOTO",
     }
     const result = await bill.postBill(billArguments);
     expect(result.error).toBe(desiredResponse)

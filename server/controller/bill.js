@@ -52,13 +52,15 @@ class Bill {
     this.response = {
       total: undefined
     }
+    this.currencyRate = undefined;
   }
 
   // Fonction qui vérifie les paramètres rentrés par l'utilisateur
   paramChecker() {
     for (let attr in this.bill) {
-      if ( (this.bill[attr] === undefined) && (attr != 'currency') && (attr != "discount") )
+      if ((this.bill[attr] === undefined) && (attr != 'currency') && (attr != "discount")) {
         return ({ "error" : "please check input arguments for /bill" });
+      }
     }
     if (this.bill.prices.length != this.bill.quantities.length) {
       return ({ "error" : "prices and quantities have not the same length for /bill" });
@@ -74,13 +76,13 @@ class Bill {
   }
 
   // Fonction qui calcule le prix total
-  priceCalculator (currencyRate) {
+  priceCalculator () {
     let result = 0;
     for (let i = 0; i < this.bill.prices.length; i++){
       result += this.bill.prices[i] * this.bill.quantities[i];
     }
 
-    this.response.total = result * (1 + this.taxList[this.bill.country]/100) * currencyRate;
+    this.response.total = result * (1 + this.taxList[this.bill.country]/100) * this.currencyRate;
   }
 
   // Fonction qui applique la réduction
@@ -143,31 +145,29 @@ class Bill {
     this.bill.country     = billArguments.country;
     this.bill.currency    = billArguments.currency;
     this.bill.discount    = billArguments.discount;
-
-    const err = this.paramChecker();
     
     // vérification des paramètres
+    const err = this.paramChecker();
     if (err){
       return err;
     }
 
     else {
       // récupération du taux de conversion
-      let currencyRate;
       if (this.bill.currency == undefined) {
-        currencyRate = 1;
+        this.currencyRate = 1;
       } else {
-        currencyRate = await this.currencyRecovery();
+        this.currencyRate = await this.currencyRecovery();
       }
 
       // erreur si mauvais taux
-      if (currencyRate == -1) {
+      if (this.currencyRate == -1) {
         return ({ "error" : "this currency does not exist" })
       } 
       
       // calcul du prix
       else {
-        this.priceCalculator(currencyRate)
+        this.priceCalculator()
         this.discountApply()
         return this.response;
       }

@@ -12,19 +12,19 @@ const bill = new Bill()
 const id = new Id()
 
 router.get('/',
-  (req, res, next) => {
+  (req, res) => {
     return res.send('Welcome on the Carpaccio app\nBy Julien DUBREUIL & Maxime JOUARD\n');
   }
 );
 
 router.get('/id',
-  (req, res, next) => {
+  (req, res) => {
     return res.send(id.getId());
   }
 );
 
 router.post('/bill',
-  async (req, res, next) => {
+  async (req, res) => {
     const billArguments = {
       prices: req.body.prices,
       quantities: req.body.quantities,

@@ -1,3 +1,4 @@
+/* eslint-env jest */
 // Test de validation
 
 var request = require('supertest');

@@ -23,7 +23,7 @@ Semantic Versioning Specification :
 - Patch version Z (x.y.Z | x > 0) : commencer le message du commit avec `fix:`
 - Minor version Y (x.Y.z | x > 0) : commencer le message du commit avec `feat:`
 - Major version X (X.y.z | X > 0) : mettre un footer avec `BREAKING CHANGE:`
-*exemple :* git commit -a -m"$(echo -e "feat: version 2\n\ntest\n\nBREAKING CHANGE: version 2")"
+*exemple :* `git commit -a -m"$(echo -e "feat: version 2\n\ntest\n\nBREAKING CHANGE: version 2")"`
 
 Pour fermer l'issue X, écrire dans le message du commit  `close #X`.
 
@@ -32,3 +32,4 @@ Pour fermer l'issue X, écrire dans le message du commit  `close #X`.
 - La requête POST /bill prend dans le body un tableau quantities, un tableau prices et une chaîne de caractère country et renvoie le prix total en appliquant la taxe associée au pays country. En cas d'argument manquant, de tableaux de tailles différentes, ou de pays non existant, un status 400 est envoyé avec l'erreur associée.
 - La TVA est prise en charge pour plusieurs pays.
 - On peut spécifier dans quelle devise on veut payer. il est à noter qu'il est possible d’omettre le paramètre currency et d’envoyer une requête de la forme { "prices" : [15.99, 11.99], "quantities" : [1, 2], "country" : "ES" } ou { "prices" : [15.99, 11.99], "quantities" : [1, 2], "country" : "ES" } comme précédemment, tout en obtenant le même résultat.
+- Une réduction sur le prix TTC est appliquable 

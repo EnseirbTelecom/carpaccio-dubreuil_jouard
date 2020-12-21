@@ -30,7 +30,9 @@
     ]
   },
   "release": {
-    "branches": ["master"]
+    "branches": [
+      "master"
+    ]
   },
   "devDependencies": {
     "@semantic-release/changelog": "^5.0.1",
@@ -41,6 +43,7 @@
     "@semantic-release/release-notes-generator": "^9.0.1",
     "@stryker-mutator/core": "^4.1.2",
     "@stryker-mutator/jest-runner": "^4.1.2",
+    "eslint": "^7.13.0",
     "jest": "^26.6.1",
     "semantic-release": "^17.3.0",
     "standard": "^16.0.3",

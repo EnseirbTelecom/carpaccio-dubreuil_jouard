@@ -1,6 +1,6 @@
 {
   "name": "carpaccio",
-  "version": "1.0.0",
+  "version": "2.2.0",
   "description": "Une API de calcul de prix.",
   "main": "server/server.js",
   "private": true,

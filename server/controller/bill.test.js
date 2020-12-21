@@ -1,3 +1,5 @@
+// Test unitaire de la classe Bill
+
 const Bill = require('./bill.js')
 
 test('POST /bill (bad arguments: not the same length)', async () => {
